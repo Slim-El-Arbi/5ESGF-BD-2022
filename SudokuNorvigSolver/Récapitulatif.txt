@@ -1,0 +1,34 @@
+Récapitulatif:
+
+On a choisi le solver Norvig pour la résolution de Sudoku
+
+-on a forké le dépôt 2 du projet sur github.
+
+-avant de passer en spark, on a executé le benchmark pour verifier
+que le solver Norvig fonctionne. 
+
+-on a lancé notre cluster en debeug via le terminal Powershell avec la
+commande debeug ci dessous 
+"spark-submit --class org.apache.spark.deploy.dotnet.DotnetRunner --master local microsoft-spark-3-2_2.12-2.1.0.jar debug"
+
+
+-On a récupéré le fichier de mille Sudoku sur Kaggle
+"var filePath = Path.Combine(Environment.CurrentDirectory, "sudoku.csv");"
+
+
+- on a adapté le code du solver dans un cluster spark dans programcs
+en créant une dataframe qui va organiser la distribution des données
+pour optimiser le temps de resolution du Sudoku
+
+"DataFrame dataFrame = spark
+                .Read()
+                .Option("header", true)
+                .Option("inferSchena", true)
+                .Schema("quizzes string, solutions string")
+                .Csv(filePath);"
+
+- on a constaté que l'éxecution avec un cluster à quatre workers de trvail
+à un core est plus efficace qu'un cluster à un worker de travail à un core
+
+
+
